@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Canela Dorada – Bogotá</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      color: #1a1108;
+      background: #fff;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      background: #1a1108;
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 2px,
+        rgba(212,160,60,0.04) 2px,
+        rgba(212,160,60,0.04) 4px
+      );
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #d4a03c;
+      border: 0.5px solid #d4a03c;
+      padding: 6px 18px;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      font-weight: 400;
+      color: #f5ead0;
+      line-height: 1.1;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: #d4a03c;
+    }
+
+    .hero-sub {
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(245,234,208,0.5);
+      margin-top: 1rem;
+      position: relative;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 2.5rem auto;
+      max-width: 320px;
+    }
+
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 0.5px;
+      background: rgba(212,160,60,0.4);
+    }
+
+    /* ── NAV ── */
+    .nav {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      border-top: 0.5px solid rgba(212,160,60,0.2);
+      border-bottom: 0.5px solid rgba(212,160,60,0.2);
+      background: #120d04;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-btn {
+      background: none;
+      border: none;
+      border-right: 0.5px solid rgba(212,160,60,0.15);
+      color: rgba(245,234,208,0.6);
+      font-family: 'Lato', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 1rem 1.8rem;
+      cursor: pointer;
+      transition: color 0.2s, background 0.2s;
+      white-space: nowrap;
+    }
+
+    .nav-btn:last-child { border-right: none; }
+
+    .nav-btn:hover, .nav-btn.active {
+      color: #d4a03c;
+      background: rgba(212,160,60,0.06);
+    }
+
+    /* ── SECTIONS ── */
+    .section {
+      padding: 3.5rem 1.5rem;
+      max-width: 860px;
+      margin: 0 auto;
+      display: none;
+    }
+
+    .section.visible { display: block; }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 400;
+      text-align: center;
+      margin-bottom: 0.5rem;
+      color: #1a1108;
+    }
+
+    .section-sub {
+      text-align: center;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #d4a03c;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── MENÚ ── */
+    .menu-category { margin-bottom: 2.5rem; }
+
+    .menu-cat-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      color: #d4a03c;
+      border-bottom: 0.5px solid rgba(212,160,60,0.25);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      padding: 0.75rem 0;
+      border-bottom: 0.5px solid #e8e2d8;
+    }
+
+    .menu-item:last-child { border-bottom: none; }
+
+    .menu-item-info { flex: 1; }
+
+    .menu-item-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 400;
+      margin-bottom: 3px;
+      color: #1a1108;
+    }
+
+    .menu-item-desc {
+      font-size: 12.5px;
+      color: #6b5e4e;
+      line-height: 1.5;
+    }
+
+    .menu-item-price {
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      color: #d4a03c;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* ── INFO CARDS ── */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .info-card {
+      background: #f9f5ef;
+      border: 0.5px solid #e8e2d8;
+      border-radius: 12px;
+      padding: 1.25rem;
+      text-align: center;
+    }
+
+    .info-card i {
+      font-size: 22px;
+      color: #d4a03c;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .info-card-label {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #6b5e4e;
+      margin-bottom: 0.4rem;
+    }
+
+    .info-card-value {
+      font-size: 14px;
+      color: #1a1108;
+      line-height: 1.5;
+    }
+
+    /* ── MAPA ── */
+    .map-frame {
+      width: 100%;
+      height: 380px;
+      border: 0.5px solid #e8e2d8;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .map-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* ── BOTÓN ── */
+    .reserve-btn {
+      display: block;
+      margin: 2rem auto 0;
+      background: #d4a03c;
+      color: #120d04;
+      border: none;
+      font-family: 'Lato', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      padding: 1rem 2.5rem;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      border-radius: 2px;
+    }
+
+    .reserve-btn:hover { background: #e8b04a; }
+    .reserve-btn:active { transform: scale(0.98); }
+
+    /* ── FORMULARIO ── */
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    label.field-label {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #6b5e4e;
+      margin-bottom: 6px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      font-family: 'Lato', sans-serif;
+      font-size: 14px;
+      color: #1a1108;
+      background: #fff;
+      border: 0.5px solid #c8bfb0;
+      border-radius: 4px;
+      padding: 10px 12px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #d4a03c;
+    }
+
+    textarea { resize: none; }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: #1a1108;
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: rgba(245,234,208,0.35);
+      margin-top: 2rem;
+    }
+
+    .footer span { color: rgba(212,160,60,0.6); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 560px) {
+      .form-grid-2 { grid-template-columns: 1fr; }
+      .nav-btn { padding: 0.9rem 1rem; font-size: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-badge">Cocina colombiana de autor</div>
+    <h1>La <em>Canela</em> Dorada</h1>
+    <p class="hero-sub">Bogotá, Colombia · Desde 1998</p>
+    <div class="divider"></div>
+    <button class="reserve-btn" onclick="showSection('reserva', null)">Reservar una mesa</button>
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <button class="nav-btn active" onclick="showSection('menu', this)">Menú</button>
+    <button class="nav-btn" onclick="showSection('nosotros', this)">Nosotros</button>
+    <button class="nav-btn" onclick="showSection('ubicacion', this)">Ubicación</button>
+    <button class="nav-btn" onclick="showSection('reserva', this)">Reservas</button>
+  </nav>
+
+  <!-- MENÚ -->
+  <div id="menu" class="section visible">
+    <h2 class="section-title">Nuestra Carta</h2>
+    
+
+    <div class="menu-category">
+      <h3 class="menu-cat-title">Entradas</h3>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <p class="menu-item-name">Ajiaco de Cordero</p>
+          <p class="menu-item-desc">Caldo bogotano con cordero deshuesado, papa criolla, guasca y crema de cilantro</p>
+        </div>
+        <span class="menu-item-price">$38.000</span>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <p class="menu-item-name">Ceviche de Trucha Andina</p>
+          <p class="menu-item-desc">Trucha del río fresca, maracuyá, ají amarillo y crocante de yuca</p>
+        </div>
+        <span class="menu-item-price">$45.000</span>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <p class="menu-item-name">Patacón con Hogao Gourmet</p>
+          <p class="menu-item-desc">Plátano verde frito, reducción de tomate y cebolla con aceite de oliva infusionado</p>
+        </div>
+        <span class="menu-item-price">$28.000</span>
+      </div>
+    </div>
+
+    <div class="menu-category">
+      <h3 class="menu-cat-title">Platos Principales</h3>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <p class="menu-item-name">Bandeja Paisa Reinterpretada</p>
+          <p class="menu-item-desc">Frijoles rojos cremosos, chicharrón crujiente, chorizo artesanal, arroz de coco y aguacate Hass</p>
+        </div>
+        <span class="menu-item-price">$78.000</span>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <p class="menu-item-name">Pargo al Ajillo con Ñame</p>
+          <p class="menu-item-desc">Filete de pargo rojo al horno, mantequilla de ajo negro, puré de ñame y ensalada tibia</p>
+        </div>
+        <span class="menu-item-price">$85.000</span>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <p class="menu-item-name">Lomo de Res a la Brasa</p>
+          <p class="menu-item-desc">Corte de lomo fino al carbón, chimichurri bogotano, papas doradas y ensalada verde</p>
+        </div>
+        <span class="menu-item-price">$95.000</span>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <p class="menu-item-name">Risotto de Champiñones Silvestres</p>
+          <p class="menu-item-desc">Arroz arborio, champiñones de temporada, trufa negra y parmesano añejo</p>
+        </div>
+        <span class="menu-item-price">$68.000</span>
+      </div>
+    </div>
+
+    <div class="menu-category">
+      <h3 class="menu-cat-title">Postres</h3>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <p class="menu-item-name">Postre de Natas con Mora Silvestre</p>
+          <p class="menu-item-desc">Receta tradicional de natas con coulis de mora de Castilla y helado artesanal</p>
+        </div>
+        <span class="menu-item-price">$32.000</span>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <p class="menu-item-name">Crème Brûlée de Panela</p>
+          <p class="menu-item-desc">Crema de vainilla de Tumaco con caramelo de panela y flores comestibles</p>
+        </div>
+        <span class="menu-item-price">$35.000</span>
+      </div>
+    </div>
+
+    <div class="menu-category">
+      <h3 class="menu-cat-title">Bebidas & Vinos</h3>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <p class="menu-item-name">Aguapanela con Limón Mandarina</p>
+          <p class="menu-item-desc">Preparación artesanal fría con panela orgánica del Huila</p>
+        </div>
+        <span class="menu-item-price">$14.000</span>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <p class="menu-item-name">Vino Tinto de la Casa</p>
+          <p class="menu-item-desc">Selección del sommelier · copa / botella</p>
+        </div>
+        <span class="menu-item-price">$28.000 / $95.000</span>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <p class="menu-item-name">Café de Especialidad</p>
+          <p class="menu-item-desc">Origen único del Huila, preparado en V60 o espresso</p>
+        </div>
+        <span class="menu-item-price">$12.000</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOSOTROS -->
+  <div id="nosotros" class="section">
+    <h2 class="section-title">Nuestra Historia</h2>
+    <p class="section-sub">Tradición & Pasión</p>
+    <p style="font-size: 15px; line-height: 1.9; color: #6b5e4e; margin-bottom: 1.5rem; text-align: center; max-width: 620px; margin-left: auto; margin-right: auto;">
+      La Canela Dorada nació en 1998 de las manos de la chef bogotana Gloria Suárez,
+      con el sueño de rescatar los sabores auténticos de la cocina colombiana
+      y elevarlos con técnicas contemporáneas. Hoy, más de 25 años después,
+      seguimos cocinando con los mismos ingredientes de siempre: producto local y mucho amor.
+    </p>
+    <p style="font-size: 15px; line-height: 1.9; color: #6b5e4e; text-align: center; max-width: 620px; margin: 0 auto;">
+      Trabajamos directamente con agricultores del altiplano cundiboyacense,
+      pescadores de la costa Pacífica y caficultores del Huila, para que cada plato
+      cuente una historia del territorio colombiano.
+    </p>
+  </div>
+
+  <!-- UBICACIÓN -->
+  <div id="ubicacion" class="section">
+    <h2 class="section-title">Encuéntranos</h2>
+    <p class="section-sub">Bogotá, Colombia</p>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <i class="ti ti-map-pin"></i>
+        <p class="info-card-label">Dirección</p>
+        <p class="info-card-value">Cra. 127 #65a-60<br>Bogotá, Colombia</p>
+      </div>
+      <div class="info-card">
+        <i class="ti ti-clock"></i>
+        <p class="info-card-label">Horario</p>
+        <p class="info-card-value">Mar – Dom<br>12:00 pm – 10:00 pm</p>
+      </div>
+      <div class="info-card">
+        <i class="ti ti-phone"></i>
+        <p class="info-card-label">Reservas</p>
+        <p class="info-card-value">+57 3151123003<br>info@caneladorada.co</p>
+      </div>
+    </div>
+
+    <div class="map-frame">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15905.195597713166!2d-74.152793!3d4.7180531!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f834602510001%3A0xb207c31768e2eb97!2sCra.%20127%20%2365a-60%2C%20Bogot%C3%A1!5e0!3m2!1ses!2sco!4v1779910786671!5m2!1ses!2sco" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        allowfullscreen
+        loading="lazy">
+      </iframe>
+    </div>
+  </div>
+
+  <!-- RESERVAS -->
+  <div id="reserva" class="section">
+    <h2 class="section-title">Reserva tu Mesa</h2>
+    <p class="section-sub">Te esperamos</p>
+
+    <div style="max-width: 480px; margin: 0 auto;">
+      <div class="form-grid-2">
+        <div>
+          <label class="field-label">Nombre</label>
+          <input type="text" placeholder="Tu nombre">
+        </div>
+        <div>
+          <label class="field-label">Teléfono</label>
+          <input type="tel" placeholder="+57 300 000 0000">
+        </div>
+      </div>
+      <div class="form-grid-2">
+        <div>
+          <label class="field-label">Fecha</label>
+          <input type="date">
+        </div>
+        <div>
+          <label class="field-label">Personas</label>
+          <select>
+            <option>1 persona</option>
+            <option>2 personas</option>
+            <option>3 personas</option>
+            <option>4 personas</option>
+            <option>5 o más</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-bottom: 1.5rem;">
+        <label class="field-label">Notas especiales</label>
+        <textarea placeholder="Alergias, celebraciones, preferencias..." style="height: 80px;"></textarea>
+      </div>
+      <button class="reserve-btn" style="width: 100%;">Confirmar Reserva</button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <span>La Canela Dorada</span> · Cra. 127 #65a-60, Bogotá · +57 (1) 234-5678
+  </footer>
+
+  <script>
+    function showSection(id, btn) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('visible'));
+      document.getElementById(id).classList.add('visible');
+      if (btn) {
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+
+</body>
+</html>
