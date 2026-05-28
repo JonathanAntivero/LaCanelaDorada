@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -352,7 +352,6 @@
   <!-- MENÚ -->
   <div id="menu" class="section visible">
     <h2 class="section-title">Nuestra Carta</h2>
-    
 
     <div class="menu-category">
       <h3 class="menu-cat-title">Entradas</h3>
@@ -496,8 +495,7 @@
     </div>
 
     <div class="map-frame">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15905.195597713166!2d-74.152793!3d4.7180531!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f834602510001%3A0xb207c31768e2eb97!2sCra.%20127%20%2365a-60%2C%20Bogot%C3%A1!5e0!3m2!1ses!2sco!4v1779910786671!5m2!1ses!2sco" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15905.195596888405!2d-74.15279299020766!3d4.718053135998862!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f834602510001%3A0xb207c31768e2eb97!2sCra.%20127%20%2365a-60%2C%20Bogot%C3%A1!5e0!3m2!1ses!2sco!4v1779981771778!5m2!1ses!2sco" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         allowfullscreen
         loading="lazy">
       </iframe>
@@ -513,21 +511,21 @@
       <div class="form-grid-2">
         <div>
           <label class="field-label">Nombre</label>
-          <input type="text" placeholder="Tu nombre">
+          <input type="text" id="r-nombre" placeholder="Tu nombre">
         </div>
         <div>
           <label class="field-label">Teléfono</label>
-          <input type="tel" placeholder="+57 300 000 0000">
+          <input type="tel" id="r-telefono" placeholder="+57 3151123003">
         </div>
       </div>
       <div class="form-grid-2">
         <div>
           <label class="field-label">Fecha</label>
-          <input type="date">
+          <input type="date" id="r-fecha">
         </div>
         <div>
           <label class="field-label">Personas</label>
-          <select>
+          <select id="r-personas">
             <option>1 persona</option>
             <option>2 personas</option>
             <option>3 personas</option>
@@ -538,15 +536,15 @@
       </div>
       <div style="margin-bottom: 1.5rem;">
         <label class="field-label">Notas especiales</label>
-        <textarea placeholder="Alergias, celebraciones, preferencias..." style="height: 80px;"></textarea>
+        <textarea id="r-notas" placeholder="Alergias, celebraciones, preferencias..." style="height: 80px;"></textarea>
       </div>
-      <button class="reserve-btn" style="width: 100%;">Confirmar Reserva</button>
+      <button class="reserve-btn" style="width: 100%;" onclick="enviarReserva()">Confirmar Reserva vía WhatsApp</button>
     </div>
   </div>
 
   <!-- FOOTER -->
   <footer class="footer">
-    <span>La Canela Dorada</span> · Cra. 127 #65a-60, Bogotá · +57 (1) 234-5678
+    <span>La Canela Dorada</span> · Cra. 127 #65a-60, Bogotá · +57 3151123003
   </footer>
 
   <script>
@@ -558,6 +556,32 @@
         btn.classList.add('active');
       }
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function enviarReserva() {
+      const nombre   = document.getElementById('r-nombre').value.trim();
+      const telefono = document.getElementById('r-telefono').value.trim();
+      const fecha    = document.getElementById('r-fecha').value;
+      const personas = document.getElementById('r-personas').value;
+      const notas    = document.getElementById('r-notas').value.trim();
+
+      if (!nombre || !fecha) {
+        alert('Por favor completá al menos tu nombre y la fecha.');
+        return;
+      }
+
+      const mensaje =
+        `Hola! Quiero hacer una reserva 🍽️%0A%0A` +
+        `👤 Nombre: ${encodeURIComponent(nombre)}%0A` +
+        `📅 Fecha: ${encodeURIComponent(fecha)}%0A` +
+        `👥 Personas: ${encodeURIComponent(personas)}%0A` +
+        `📞 Teléfono: ${encodeURIComponent(telefono || 'No indicado')}%0A` +
+        `📝 Notas: ${encodeURIComponent(notas || 'Ninguna')}`;
+
+      // 👇 CAMBIÁ ESTE NÚMERO por el tuyo (código de país + número, sin + ni espacios)
+      const numero = '573151123003';
+
+      window.open(`https://wa.me/${numero}?text=${mensaje}`, '_blank');
     }
   </script>
 
